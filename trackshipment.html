@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Shipment - BOFAR LOGISTICS</title>
+    <!-- Optimized Font Awesome import -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header styles */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: #0066cc;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #0066cc;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #0066cc;
+        }
+        
+        .cta-button {
+            background: #0066cc;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: #004d99;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .tracking-hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(to right, #0066cc, #004d99);
+            color: white;
+            text-align: center;
+        }
+        
+        .tracking-hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .tracking-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Tracking Section */
+        .tracking {
+            padding: 80px 0;
+        }
+        
+        .tracking-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .tracking-form {
+            display: flex;
+            margin-bottom: 40px;
+            gap: 15px;
+        }
+        
+        .tracking-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .tracking-input:focus {
+            border-color: #0066cc;
+            outline: none;
+        }
+        
+        .tracking-button {
+            padding: 15px 30px;
+            white-space: nowrap;
+        }
+        
+        .tracking-result {
+            display: none;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+        }
+        
+        .tracking-result h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #0066cc;
+        }
+        
+        .status-timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .status-timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #ddd;
+        }
+        
+        .status-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .status-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #ddd;
+        }
+        
+        .status-item.active::before {
+            background: #0066cc;
+            border-color: #0066cc;
+        }
+        
+        .status-item.completed::before {
+            background: #25D366;
+            border-color: #25D366;
+        }
+        
+        .status-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .status-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .package-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .detail-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .detail-card h4 {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .detail-card p {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .help-section {
+            background: #f5f5f5;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        
+        .help-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .help-section p {
+            margin-bottom: 20px;
+        }
+        
+        /* Tracking Numbers Section */
+        .tracking-numbers {
+            padding: 60px 0;
+            background: white;
+        }
+        
+        .numbers-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .number-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            background: #f9f9f9;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .number-card i {
+            font-size: 2.5rem;
+            color: #0066cc;
+            margin-bottom: 20px;
+        }
+        
+        .number-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .number-card p {
+            color: #666;
+        }
+        
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col a:hover {
+            color: #0066cc;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #0066cc;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background: white;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                z-index: 999;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            nav li {
+                margin: 15px 0;
+            }
+            
+            .tracking-form {
+                flex-direction: column;
+            }
+            
+            .package-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .numbers-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-shipping-fast logo-icon"></i>
+                <h1>BOFAR LOGISTICS</h1>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="trackshipment.html" class="cta-button">Track Shipment</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="tracking-hero">
+        <div class="container">
+            <h2>Track Your Shipment</h2>
+            <p>Enter your tracking number to get real-time updates on your package location and delivery status</p>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section class="tracking">
+        <div class="container">
+            <div class="tracking-container">
+                <form class="tracking-form" id="trackingForm">
+                    <input type="text" class="tracking-input" id="trackingNumber" placeholder="Enter your tracking number (e.g. BFR123456789)" required>
+                    <button type="submit" class="cta-button tracking-button">Track Now</button>
+                </form>
+                
+                <div class="tracking-result" id="trackingResult">
+                    <h3>Shipment Status</h3>
+                    
+                    <div class="status-timeline">
+                        <div class="status-item completed">
+                            <h4>Order Received</h4>
+                            <p>October 15, 2023 - 10:30 AM</p>
+                            <p>Lagos, Nigeria</p>
+                        </div>
+                        
+                        <div class="status-item completed">
+                            <h4>Package Processed</h4>
+                            <p>October 15, 2023 - 2:15 PM</p>
+                            <p>Lagos Distribution Center</p>
+                        </div>
+                        
+                        <div class="status-item completed">
+                            <h4>In Transit</h4>
+                            <p>October 16, 2023 - 9:45 AM</p>
+                            <p>En route to Abuja</p>
+                        </div>
+                        
+                        <div class="status-item active">
+                            <h4>Out for Delivery</h4>
+                            <p>October 17, 2023 - 8:00 AM</p>
+                            <p>Abuja Metropolitan Area</p>
+                        </div>
+                        
+                        <div class="status-item">
+                            <h4>October</h4>
+                            <p>Expected by March 17, 2023 - EOD</p>
+                        </div>
+                    </div>
+                    
+                    <div class="package-details">
+                        <div class="detail-card">
+                            <h4>Tracking Number</h4>
+                            <p id="resultTrackingNumber">BFR123456789</p>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <h4>Service Type</h4>
+                            <p>Express Delivery</p>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <h4>Package Weight</h4>
+                            <p>2.5 kg</p>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <h4>Estimated Delivery</h4>
+                            <p>October 17, 2025</p>
+                        </div>
+                    </div>
+                    
+                    <div class="help-section">
+                        <h3>Need Help With Your Shipment?</h3>
+                        <p>If you have any questions about your delivery or need assistance, our customer support team is available 24/7.</p>
+                        <a href="contact.html" class="cta-button">Contact Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Numbers Section -->
+    <section class="tracking-numbers">
+        <div class="container">
+            <h2 class="section-title">Where to Find Your Tracking Number</h2>
+            <div class="numbers-container">
+                <div class="number-card">
+                    <i class="fas fa-receipt"></i>
+                    <h3>Shipping Receipt</h3>
+                    <p>Your tracking number is printed on the receipt provided when you shipped your package.</p>
+                </div>
+                
+                <div class="number-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email Confirmation</h3>
+                    <p>Check the confirmation email we sent when your shipment was processed.</p>
+                </div>
+                
+                <div class="number-card">
+                    <i class="fas fa-sms"></i>
+                    <h3>SMS Notification</h3>
+                    <p>If you provided a phone number, we sent your tracking number via SMS.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>BOFAR LOGISTICS</h4>
+                    <p>Your trusted partner for fast, reliable, and affordable logistics solutions across Nigeria with special focus on Lagos and surrounding areas.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/share/1D3grLkt41/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/bofarsLogistic" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/+2347063160971" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://linkedin.com/in/FarayolaBolaji" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#">International Shipping</a></li>
+                        <li><a href="#">Express Delivery</a></li>
+                        <li><a href="#">Door to Door Delivery</a></li>
+                        <li><a href="#">Cargo Express</a></li>
+                        <li><a href="#">Domestic Services</a></li>
+                        <li><a href="#">Same Day Delivery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="tracking.html">Track Shipment</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234 (0) 706 316 0971</li>
+                        <li><i class="fas fa-envelope"></i> info@bofarlogistics.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 39, Leye Street, Ijegun Last Bus Stop, Lagos, Nigeria</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 BOFAR LOGISTICS. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Close mobile nav when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('nav').classList.remove('active');
+            });
+        });
+        
+        // Tracking form functionality
+        document.getElementById('trackingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const trackingNumber = document.getElementById('trackingNumber').value.trim();
+            
+            if (trackingNumber) {
+                // In a real implementation, you would fetch tracking data from a server
+                // For this example, we'll simulate a successful tracking result
+                
+                // Update the tracking number in results
+                document.getElementById('resultTrackingNumber').textContent = trackingNumber;
+                
+                // Show the tracking result
+                document.getElementById('trackingResult').style.display = 'block';
+                
+                // Scroll to results
+                document.getElementById('trackingResult').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+        
+        // Sample tracking numbers for demo purposes
+        const sampleNumbers = ['BFR123456789', 'BFR987654321', 'BFR456789123'];
+        
+        // Pre-fill with a sample tracking number for demo
+        document.getElementById('trackingNumber').placeholder = 'Try: ' + sampleNumbers[0];
+    </script>
+</body>
+</html>
