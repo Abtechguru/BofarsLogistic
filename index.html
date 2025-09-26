@@ -3,23 +3,543 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BOFAR LOGISTICS - Premium Delivery Services in Nigeria. Fast, reliable, and affordable delivery services with special focus on Lagos and surrounding areas.">
+    <meta name="keywords" content="logistics, delivery, Nigeria, Lagos, shipping, cargo, express delivery">
     <title>BOFAR LOGISTICS - Premium Delivery Services in Nigeria</title>
-    <!-- Optimized Font Awesome import -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Optimized Font Awesome import (using newer version) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Inline critical CSS for faster initial render -->
+    <style>
+        /* Critical CSS - Minimal styles needed for above-the-fold content */
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #ff6b00;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+            --gray-color: #777;
+            --white: #fff;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* Carousel Styles */
+        .carousel {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+        
+        .carousel-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        .carousel-image.active {
+            opacity: 1;
+        }
+        
+        .dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .dot.active {
+            background-color: var(--white);
+            transform: scale(1.2);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--gray-color);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .section-title p {
+            color: var(--gray-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .service-content p {
+            margin-bottom: 15px;
+            color: var(--gray-color);
+        }
+        
+        .service-tag {
+            display: inline-block;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .client-info img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .client-details h4 {
+            margin-bottom: 5px;
+        }
+        
+        .client-details p {
+            font-style: normal;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-col p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .tracking-input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-family: inherit;
+        }
+        
+        .footer-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: var(--box-shadow);
+                padding: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .header-container .cta-button {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .carousel {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .carousel {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="container header-container">
             <div class="logo">
-                <i class="fas fa-shipping-fast logo-icon"></i>
+                <i class="fas fa-shipping-fast logo-icon" aria-hidden="true"></i>
                 <h1>BOFAR LOGISTICS</h1>
             </div>
-            <div class="mobile-menu">
+            <button class="mobile-menu" aria-label="Toggle navigation menu">
                 <i class="fas fa-bars"></i>
-            </div>
+            </button>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
@@ -34,16 +554,16 @@
     </header>
     
     <!-- Flash Display of Services -->
-    <section class="carousel">
-        <img src="https://placehold.co/1200x400/0066cc/white?text=Fast+Delivery" class="carousel-image active" alt="Fast Delivery Service" />
-        <img src="https://placehold.co/1200x400/0066cc/white?text=Nationwide+Coverage" class="carousel-image" alt="Nationwide Coverage" />
-        <img src="https://placehold.co/1200x400/0066cc/white?text=International+Shipping" class="carousel-image" alt="International Shipping" />
-        <img src="https://placehold.co/1200x400/0066cc/white?text=Reliable+Service" class="carousel-image" alt="Reliable Logistics Service" />
-        <div class="dots">
-            <span class="dot active" data-index="0" aria-label="Slide 1"></span>
-            <span class="dot" data-index="1" aria-label="Slide 2"></span>
-            <span class="dot" data-index="2" aria-label="Slide 3"></span>
-            <span class="dot" data-index="3" aria-label="Slide 4"></span>
+    <section class="carousel" aria-label="Service highlights carousel">
+        <img src="https://placehold.co/1200x400/0066cc/white?text=Fast+Delivery" class="carousel-image active" alt="Fast Delivery Service" loading="lazy" />
+        <img src="https://placehold.co/1200x400/0066cc/white?text=Nationwide+Coverage" class="carousel-image" alt="Nationwide Coverage" loading="lazy" />
+        <img src="https://placehold.co/1200x400/0066cc/white?text=International+Shipping" class="carousel-image" alt="International Shipping" loading="lazy" />
+        <img src="https://placehold.co/1200x400/0066cc/white?text=Reliable+Service" class="carousel-image" alt="Reliable Logistics Service" loading="lazy" />
+        <div class="dots" role="tablist">
+            <button class="dot active" data-index="0" aria-label="Slide 1" role="tab" aria-selected="true"></button>
+            <button class="dot" data-index="1" aria-label="Slide 2" role="tab" aria-selected="false"></button>
+            <button class="dot" data-index="2" aria-label="Slide 3" role="tab" aria-selected="false"></button>
+            <button class="dot" data-index="3" aria-label="Slide 4" role="tab" aria-selected="false"></button>
         </div>
     </section>
 
@@ -69,7 +589,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-globe-africa"></i>
+                        <i class="fas fa-globe-africa" aria-hidden="true"></i>
                     </div>
                     <div class="service-content">
                         <h3>International Shipping</h3>
@@ -80,7 +600,7 @@
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-bolt"></i>
+                        <i class="fas fa-bolt" aria-hidden="true"></i>
                     </div>
                     <div class="service-content">
                         <h3>Express Delivery</h3>
@@ -91,7 +611,7 @@
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-home" aria-hidden="true"></i>
                     </div>
                     <div class="service-content">
                         <h3>Door to Door Delivery</h3>
@@ -102,7 +622,7 @@
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-ship"></i>
+                        <i class="fas fa-ship" aria-hidden="true"></i>
                     </div>
                     <div class="service-content">
                         <h3>Cargo Express</h3>
@@ -113,7 +633,7 @@
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-truck"></i>
+                        <i class="fas fa-truck" aria-hidden="true"></i>
                     </div>
                     <div class="service-content">
                         <h3>Domestic Pickup & Delivery</h3>
@@ -124,7 +644,7 @@
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-stopwatch"></i>
+                        <i class="fas fa-stopwatch" aria-hidden="true"></i>
                     </div>
                     <div class="service-content">
                         <h3>Same Day Delivery</h3>
@@ -148,7 +668,7 @@
                 <div class="testimonial-card">
                     <p>"BOFAR Logistics has transformed how we handle our shipments. Their same-day delivery service in Lagos is unmatched in speed and reliability. Highly recommended for businesses!"</p>
                     <div class="client-info">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Adebayo">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Adebayo" loading="lazy">
                         <div class="client-details">
                             <h4>James Adebayo</h4>
                             <p>CEO, Tech Solutions Ltd.</p>
@@ -167,10 +687,10 @@
                     <h4>BOFAR LOGISTICS</h4>
                     <p>Your trusted partner for fast, reliable, and affordable logistics solutions across Nigeria with special focus on Lagos and surrounding areas.</p>
                     <div class="social-links">
-                        <a href="https://facebook.com/share/1D3grLkt41/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://twitter.com/bofarsLogistic" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="https://wa.me/+2347063160971" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://linkedin.com/in/FarayolaBolaji" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://facebook.com/share/1D3grLkt41/" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://twitter.com/bofarsLogistic" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="https://wa.me/+2347063160971" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                        <a href="https://linkedin.com/in/FarayolaBolaji" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 
@@ -201,7 +721,7 @@
                 <div class="footer-col">
                     <h4>Newsletter</h4>
                     <p>Subscribe to our newsletter for the latest updates and offers.</p>
-                    <form id="subscribeForm">
+                    <form id="subscribeForm" novalidate>
                         <input type="email" id="emailInput" placeholder="Your Email" required class="tracking-input">
                         <button type="submit" class="cta-button" style="width:100%">Subscribe</button>
                     </form>
@@ -221,56 +741,98 @@
         </div>
     </footer>
    
+    <!-- Deferred JavaScript -->
     <script>
         // Mobile Navigation
         document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav').classList.toggle('active');
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('active');
+            
+            // Update ARIA attributes for accessibility
+            const isExpanded = nav.classList.contains('active');
+            this.setAttribute('aria-expanded', isExpanded);
         });
         
         // Close mobile nav when clicking on a link
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
                 document.querySelector('nav').classList.remove('active');
+                document.querySelector('.mobile-menu').setAttribute('aria-expanded', 'false');
             });
         });
         
         // Carousel functionality
         let currentSlide = 0;
+        let slideInterval;
         const slides = document.querySelectorAll('.carousel-image');
         const dots = document.querySelectorAll('.dot');
         const slideCount = slides.length;
         
         function showSlide(index) {
             // Hide all slides
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+                slide.setAttribute('aria-hidden', 'true');
+            });
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                dot.setAttribute('aria-selected', 'false');
+            });
             
             // Show the selected slide
             slides[index].classList.add('active');
+            slides[index].setAttribute('aria-hidden', 'false');
             dots[index].classList.add('active');
+            dots[index].setAttribute('aria-selected', 'true');
             currentSlide = index;
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slideCount;
+            showSlide(currentSlide);
         }
         
         // Add click events to dots
         dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showSlide(index));
+            dot.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                showSlide(index);
+                startCarousel();
+            });
+            
+            // Add keyboard navigation for dots
+            dot.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    clearInterval(slideInterval);
+                    showSlide(index);
+                    startCarousel();
+                }
+            });
         });
         
-        // Auto-advance slides
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % slideCount;
-            showSlide(currentSlide);
-        }, 5000);
+        function startCarousel() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+        
+        // Pause carousel on hover for better UX
+        const carousel = document.querySelector('.carousel');
+        carousel.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        carousel.addEventListener('mouseleave', startCarousel);
+        
+        // Start the carousel
+        startCarousel();
         
         // Newsletter form handling
         document.getElementById('subscribeForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
-            const email = document.getElementById('emailInput').value;
+            const email = document.getElementById('emailInput').value.trim();
             const messageElement = document.getElementById('subscriptionMessage');
             
-            // Basic validation
-            if (!email || !email.includes('@')) {
+            // Enhanced validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
                 messageElement.textContent = 'Please enter a valid email address.';
                 messageElement.style.color = 'red';
                 return;
@@ -289,6 +851,36 @@
                 messageElement.textContent = '';
             }, 3000);
         });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--white)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+        
+        // Lazy loading for images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
     </script>
 </body>
 </html>
